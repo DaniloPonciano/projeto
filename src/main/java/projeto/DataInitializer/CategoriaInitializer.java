@@ -1,31 +1,23 @@
 package projeto.DataInitializer;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
-import projeto.Repository.CategoriaRepository;
 import projeto.models.Categoria;
+import projeto.Repository.CategoriaRepository;
 
-@DataInitilizerType
+
 @Component
 public class CategoriaInitializer {
-    @Autowired
-    private CategoriaRepository categoriaRepository;
 
+    @DataInitializerType(repository = CategoriaRepository.class, model = Categoria.class)
     private String[] categorias = {
-        "Deficiência Física",
-        "Deficiência Visual",
-        "Deficiência Auditiva",
-        "Deficiência Intelectual",
-        "Deficiência Psicossocial",
-        "Deficiência Múltipla",
+        "Físicas", 
+        "Intelectuais", 
+        "Sensoriais",
+        "Psicossociais ou Mentais",
+        "Neurológicas", 
+        "Múltiplas",
+        "Aprendizagem"
     };
-
-    public void init(){
-            if (categoriaRepository.count() == 0) {
-                for (String nomeCategoria : categorias) {
-                    categoriaRepository.save(new Categoria(nomeCategoria));
-                }    
-            }
-    }
 }

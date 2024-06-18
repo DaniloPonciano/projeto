@@ -1,18 +1,15 @@
 package projeto.DataInitializer;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
-
-import projeto.Repository.BairroRepository;
 import projeto.models.Bairro;
+import projeto.Repository.BairroRepository;
 
-@DataInitilizerType
+
 @Component
 public class BairroInitializer {
 
-    @Autowired
-    private BairroRepository bairroRepository;
-
+    @DataInitializerType(repository = BairroRepository.class, model = Bairro.class)
     private String[] bairros = {
     "Agua Verde",
     "Águas Claras",
@@ -82,12 +79,4 @@ public class BairroInitializer {
     "Vila Rezende",
     "Wiedenmann"
     };
-    
-    public void init(){
-            if(bairroRepository.count() == 0){
-                for (String nomeBairro : bairros) {
-                    bairroRepository.save(new Bairro(nomeBairro));
-                }
-            }
-    }
 }
